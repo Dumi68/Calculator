@@ -1,21 +1,39 @@
-// calculator.js
+// Calculator functionality
 
-// Function to handle number input
-function inputNumber(num) {
-    // Implementation for number input
+let displayValue = '';
+
+function appendNumber(number) {
+    displayValue += number;
+    updateDisplay();
 }
 
-// Function to handle operator input
-function inputOperator(operator) {
-    // Implementation for operator input
+function appendOperator(operator) {
+    displayValue += ' ' + operator + ' ';
+    updateDisplay();
 }
 
-// Function to perform calculation
 function calculate() {
-    // Implementation for calculation
+    try {
+        // Replace the displayValue string into an evaluable expression
+        const result = eval(displayValue);
+        displayValue = result.toString();
+    } catch (e) {
+        displayValue = 'Error';
+    }
+    updateDisplay();
 }
 
-// Function to manage display
-function updateDisplay(value) {
-    // Implementation for display management
+function clearDisplay() {
+    displayValue = '';
+    updateDisplay();
+}
+
+function deleteLastChar() {
+    displayValue = displayValue.slice(0, -1);
+    updateDisplay();
+}
+
+function updateDisplay() {
+    // Assuming there's an HTML element with ID 'display'
+    document.getElementById('display').innerText = displayValue;
 }
